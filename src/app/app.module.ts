@@ -49,6 +49,7 @@ import {SecurityService} from "./common/service/security.service";
 import {BikesComponent} from "./bikes/bikes-component";
 import {StationsComponent} from "./stations/stations-component";
 import {RegisterComponent} from "./register/register-component";
+import {BikeStationService} from "./common/service/bike-station.service";
 
 registerLocaleData(localePl, 'pl');
 
@@ -107,7 +108,8 @@ registerLocaleData(localePl, 'pl');
         AppService,
         AuthGuard,
         MsgService,
-        SecurityService
+        SecurityService,
+        BikeStationService
     ],
     bootstrap: [AppComponent]
 })
