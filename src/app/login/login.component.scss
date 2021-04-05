@@ -1,0 +1,97 @@
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+}
+
+.ui-inputgroup {
+  margin-top: 15px;
+}
+
+.login {
+  margin: 100px 0;
+  width: 368px;
+  z-index: 0;
+
+  &__box {
+    background: #f9f9f9;
+    padding: 5px 20px;
+    border: 1px #c7c7c7 solid;
+  }
+
+  .login__header {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: #8c99a2;
+    margin: 10px 0;
+  }
+
+  .login__button {
+    margin-top: 15px;
+    border: unset;
+    background: #6aab37;
+    float: right;
+    text-transform: uppercase;
+    font-weight: bold;
+    transition: ease-in-out all .3s;
+
+    &:hover {
+      background: rgba(106, 171, 55, 0.8);
+    }
+
+  }
+
+  ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-style: italic;
+  }
+  ::-moz-placeholder { /* Firefox 19+ */
+    font-style: italic;
+  }
+  :-ms-input-placeholder { /* IE 10+ */
+    font-style: italic;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    font-style: italic;
+  }
+  .login__input {
+    width: 100%;
+    font-size: 13px;
+  }
+
+  .login__lostpass {
+    width: 100%;
+    display: flex;
+    margin-top: 15px;
+    justify-content: flex-end;
+  }
+  .login__link {
+    color: #199cd2;
+    font-size: 1.2rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    margin: 0 0 8px 0;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.language-info{
+  color: #a5afbb !important;
+  margin-left: 5px;
+
+  a{
+    color: #a5afbb !important;
+  }
+
+  .selected{
+    color: #4e5e6d !important;
+  }
+
+}
+
+.session-expired {
+  font-style: italic;
+  color: #de533a;
+  margin-bottom: 10px;
+}
