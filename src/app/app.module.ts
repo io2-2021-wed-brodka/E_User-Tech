@@ -47,6 +47,8 @@ import {MenuComponent} from "./menu/menu.component";
 import {MsgService} from "./common/service/msg.service";
 import {SecurityService} from "./common/service/security.service";
 import {BikesComponent} from "./bikes/bikes-component";
+import {StationsComponent} from "./stations/stations-component";
+import {RegisterComponent} from "./register/register-component";
 
 registerLocaleData(localePl, 'pl');
 
@@ -57,7 +59,9 @@ registerLocaleData(localePl, 'pl');
         ErrorComponent,
         MainComponent,
         MenuComponent,
-        BikesComponent
+        BikesComponent,
+        StationsComponent,
+        RegisterComponent
     ],
     imports: [
         HttpClientModule,

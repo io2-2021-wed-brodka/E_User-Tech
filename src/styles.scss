@@ -246,6 +246,10 @@ body .ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item.ui-state-h
   height: calc(100% - 35px);
 }
 
+.width100 {
+  width: 100%;
+}
+
 .ui-button-small {
   font-size: 12px !important;
 }
@@ -268,6 +272,8 @@ body .ui-multiselect-panel .ui-multiselect-items .ui-multiselect-item.ui-state-h
   .topMenu__header {
     display: flex;
     align-items: center;
+    font-style: oblique;
+    font-weight: bold;
 
     .topMenu__logo {
       width: 46px;

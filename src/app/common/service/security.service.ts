@@ -19,9 +19,12 @@ export class SecurityService {
             'content-type': 'application/x-www-form-urlencoded'
         });
 
-        const body = `username=${credentials.username}&password=${encodeURIComponent(credentials.password)}`;
+        const body = {
+            "userName": credentials.username,
+            "password": encodeURIComponent(credentials.password)
+        }
 
-        return this.http.post('/api/security/login', body, {headers: headers})
+        return this.http.post('/api/login', body, {headers: headers})
             .pipe(catchError(this.handleLoginError));
     }
 

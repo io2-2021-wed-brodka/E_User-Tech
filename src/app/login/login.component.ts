@@ -28,10 +28,14 @@ export class LoginComponent implements OnInit {
 
     login() {
         this.securityService.authenticate(this.credentials).subscribe((url: string) => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/start']);
         }, err => {
             this.message = 'Invalid credentials'
         });
+    }
+
+    navigateToRegister() {
+        this.router.navigate(['/register']);
     }
 
 }
