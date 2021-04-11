@@ -7,52 +7,31 @@ import {AppService} from '../../app.service';
 import {of} from "rxjs";
 import {Router} from "@angular/router";
 import {LoginResponseDTO} from "../../generated/dto";
+import {SecurityService} from "./security.service";
 
 @Injectable()
-export class SecurityService {
-    set role(value: string) {
-        this._role = value;
-    }
-    set token(value: string) {
-        this._token = value;
-    }
-    get token(): string {
-        return this._token;
-    }
-    private _token = "";
+export class RegisterService {
 
-    get role(): string {
-        return this._role;
-    }
-    private _role: string;
-
-    constructor(private http: HttpClient, private app: AppService, private router: Router) {
+    constructor(private http: HttpClient, private app: AppService, private router: Router, private securityService: SecurityService) {
     }
 
-
-
-    authenticate(credentials): Observable<any> {
+    register(credentials): Observable<any> {
 
         const body = {
             "login": credentials.username,
             "password": encodeURIComponent(credentials.password)
         }
 
-        return this.http.post<LoginResponseDTO>('/api/login', body)
+        return this.http.post<LoginResponseDTO>('/api/register', body)
             .pipe(map(r => {
-                this._token = r.token;
-                this._role = r.role;
+                this.securityService.token = r.token;
+                this.securityService.role = r.role;
                 return r;
             }))
-            .pipe(catchError(this.handleLoginError))
+            .pipe(catchError(this.handleRegistrationError))
     }
 
-    logout(): Observable<any> {
-        return this.http.post('/api/security/logout', null)
-            .pipe(catchError(this.handleError));
-    }
-
-    private handleLoginError(error: HttpErrorResponse) {
+    private handleRegistrationError(error: HttpErrorResponse) {
         if (error.status === 200 || error.status === 404) {
             return of(error.url);
         } else {

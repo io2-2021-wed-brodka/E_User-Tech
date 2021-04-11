@@ -4,6 +4,7 @@ import {MainComponent} from './main/main.component';
 import {BikesComponent} from "./bikes/bikes-component";
 import {StationsComponent} from "./stations/stations-component";
 import {RegisterComponent} from "./register/register-component";
+import {AuthGuard} from "./common/guards/auth-guard";
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -12,6 +13,8 @@ export const routes: Routes = [
     {
         path: 'start',
         component: MainComponent,
+        canActivate: [AuthGuard],
+        canActivateChild: [AuthGuard],
         children: [
             {
                 path: 'bikes',

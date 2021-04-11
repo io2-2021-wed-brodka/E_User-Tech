@@ -7,7 +7,38 @@
   </div>
   <main class="main flexJustifyCenter">
     <div class="login default-size-button">
-    Tu jakies rejestrowanie
+      <div *ngIf="sessionExpired" class="session-expired">
+        Session expired
+      </div>
+      <form role="form" style="padding: 10px" (submit)="register()">
+
+        <div class="login__box" style="padding: 20px">
+
+          <div class="login__header" i18n>Register</div>
+
+          <div class="alert alert-danger" *ngIf="message">
+            <div class="exclamation">!</div>
+            {{message}}
+          </div>
+
+          <div class="ui-inputgroup">
+            <input pInputText type="text" class="login__input" i18n-placeholder placeholder="Login"
+                   id="username" name="username" [(ngModel)]="credentials.username"/>
+          </div>
+          <div class="ui-inputgroup">
+            <input pInputText type="password" class="login__input" i18n-placeholder placeholder="Password"
+                   id="password" name="password" [(ngModel)]="credentials.password"/>
+          </div>
+          <div class="ui-inputgroup">
+            <input pInputText type="password" class="login__input" i18n-placeholder placeholder="Password"
+                   id="repeatPassword" name="repeatPassword" [(ngModel)]="credentials.repeatPassword"/>
+          </div>
+        </div>
+        <div class="register-link">
+          <span>Already have an account? <span class="register-text" (click)="navigateToLogin()">Login</span></span>
+        </div>
+        <button pButton type="submit" label="Register" class="ui-button login__button" i18n-label></button>
+      </form>
     </div>
   </main>
 </div>

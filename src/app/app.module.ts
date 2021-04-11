@@ -6,7 +6,7 @@ import {RouterModule} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {ErrorComponent} from './error/error.component';
 import {AuthGuard} from './common/guards/auth-guard';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {registerLocaleData} from '@angular/common';
 import localePl from '@angular/common/locales/pl';
@@ -50,6 +50,8 @@ import {BikesComponent} from "./bikes/bikes-component";
 import {StationsComponent} from "./stations/stations-component";
 import {RegisterComponent} from "./register/register-component";
 import {BikeStationService} from "./common/service/bike-station.service";
+import {AuthInterceptor} from "./common/interceptors/auth-interceptor";
+import {RegisterService} from "./common/service/register.service";
 
 registerLocaleData(localePl, 'pl');
 
@@ -109,7 +111,13 @@ registerLocaleData(localePl, 'pl');
         AuthGuard,
         MsgService,
         SecurityService,
-        BikeStationService
+        BikeStationService,
+        RegisterService,
+        {
+            provide : HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi   : true,
+        },
     ],
     bootstrap: [AppComponent]
 })
