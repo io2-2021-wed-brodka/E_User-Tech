@@ -1,4 +1,4 @@
-<div class="ui-g" style="background-color: #4eabcd">
+<div class="ui-g" style="background-color: #3ea0dc">
   <div class="ui-g-12 topMenu">
     <div class="topMenu__header">
       <i class="fas fa-bicycle" style="margin-right: 12px"></i>
@@ -12,7 +12,7 @@
       </div>
       <form role="form" style="padding: 10px" (submit)="register()">
 
-        <div class="login__box" style="padding: 20px">
+        <div class="login__box" >
 
           <div class="login__header" i18n>Register</div>
 
@@ -30,14 +30,15 @@
                    id="password" name="password" [(ngModel)]="credentials.password"/>
           </div>
           <div class="ui-inputgroup">
-            <input pInputText type="password" class="login__input" i18n-placeholder placeholder="Password"
+            <input pInputText type="password" class="login__input" i18n-placeholder placeholder="Repeat Password"
                    id="repeatPassword" name="repeatPassword" [(ngModel)]="credentials.repeatPassword"/>
           </div>
+
+          <button pButton type="submit" label="Register" class="ui-button login__button" i18n-label></button>
         </div>
         <div class="register-link">
           <span>Already have an account? <span class="register-text" (click)="navigateToLogin()">Login</span></span>
         </div>
-        <button pButton type="submit" label="Register" class="ui-button login__button" i18n-label></button>
       </form>
     </div>
   </main>
