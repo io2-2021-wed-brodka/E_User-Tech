@@ -11,12 +11,15 @@ import {LoginResponseDTO} from "../../generated/dto";
 @Injectable()
 export class SecurityService {
     set role(value: string) {
+        sessionStorage.setItem(window.location.host + 'role', value);
         this._role = value;
     }
     set token(value: string) {
+        sessionStorage.setItem(window.location.host + 'token', value);
         this._token = value;
     }
     get token(): string {
+        this.tryLoadToken();
         return this._token;
     }
     private _token = "";
@@ -40,8 +43,9 @@ export class SecurityService {
 
         return this.http.post<LoginResponseDTO>('/api/login', body)
             .pipe(map(r => {
-                this._token = r.token;
-                this._role = r.role;
+                this.token = r.token;
+                this.role = r.role;
+
                 return r;
             }))
             .pipe(catchError(this.handleLoginError))
@@ -77,6 +81,11 @@ export class SecurityService {
         // return an observable with a user-facing error message
         return throwError(
             'Something bad happened; please try again later.');
+    }
+
+    private tryLoadToken() {
+        this._token = sessionStorage.getItem(window.location.host + 'token');
+        this._role = sessionStorage.getItem(window.location.host + 'role');
     }
 
 }
