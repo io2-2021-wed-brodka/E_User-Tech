@@ -2,7 +2,7 @@ import {Routes} from '@angular/router';
 import {LoginComponent} from './login/login.component';
 import {MainComponent} from './main/main.component';
 import {BikesComponent} from "./bikes/bikes-component";
-import {StationsComponent} from "./stations/stations-component";
+import {StationsComponent} from "./stations/stations.component";
 import {RegisterComponent} from "./register/register-component";
 import {AuthGuard} from "./common/guards/auth-guard";
 

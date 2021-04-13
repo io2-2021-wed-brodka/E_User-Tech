@@ -15,7 +15,7 @@
         <div class="header">Choose a station to return selected bike</div>
 
         <div class="filter">
-            <input id="filer-stations" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
+            <input id="filer-stations" type="text" value="{{filter}}" #v placeholder="Filter" (input)="onFilterInput(v.value)">
         </div>
 
         <div class="stations-container">

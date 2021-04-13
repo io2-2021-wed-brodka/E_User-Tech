@@ -23,4 +23,15 @@ export class BikeService {
 
         return this.http.post(`/api/stations/${stationId}/bikes`, body);
     }
+
+    rentBike(id: number) : Observable<any>{
+        const body = {
+            "id": id
+        }
+        return this.http.post("/api/bikes/rented", body);
+    }
+
+    getBikesInStation(stationId: number): Observable<BikeDTO[]> {
+        return this.http.get<BikeDTO[]>(`/api/stations/${stationId}/bikes`);
+    }
 }

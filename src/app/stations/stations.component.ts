@@ -8,11 +8,11 @@ import {BikeDTO, BikeStationDTO} from "../generated/dto";
 import {BikeStationService} from "../common/service/bike-station.service";
 
 @Component({
-    selector: 'app-bikes',
-    templateUrl: './bikes.component.html',
-    styleUrls: ['./bikes.component.scss']
+    selector: 'app-stations',
+    templateUrl: './stations.component.html',
+    styleUrls: ['./stations.component.scss']
 })
-export class BikesComponent implements OnInit {
+export class StationsComponent implements OnInit {
 
     constructor(private securityService: SecurityService,
                 private app: AppService,
@@ -30,28 +30,6 @@ export class BikesComponent implements OnInit {
     filter: string;
 
     ngOnInit(): void {
-        this.bikeService.getRentedBikes().subscribe(bikes => {
-            this.bikes = bikes;
-        })
-    }
-
-    onBikeClick(bike: BikeDTO) {
-        if (this.selectedBike == bike) {
-            this.selectedBike = null;
-            return;
-        }
-        this.selectedBike = bike;
-        if (!this.loadedStations) {
-            this.loadStations();
-        }
-    }
-
-    onFilterInput(value: string) {
-        this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
-    }
-
-    loadStations() {
         this.bikeStationService.getAllBikeStations()
             .subscribe(stations => {
                 this.loadedStations = stations;
@@ -59,19 +37,35 @@ export class BikesComponent implements OnInit {
             })
     }
 
+    onBikeClick(bike: BikeDTO) {
+        this.selectedBike = bike;
+    }
+
+    onFilterInput(value: string) {
+        this.filter = value;
+        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+    }
+
     onStationClick(s: BikeStationDTO) {
+        if(this.selectedStation == s) {
+            this.selectedStation = null;
+            return;
+        }
         this.selectedStation = s;
+        this.bikeService.getBikesInStation(s.id)
+            .subscribe(bikes => {
+                this.bikes = bikes;
+            });
     }
 
     onNoClick() {
-        this.selectedStation = null;
+        this.selectedBike = null;
     }
 
     onYesClick() {
-        this.bikeService.returnBike(this.selectedBike.id, this.selectedStation.id)
+        this.bikeService.rentBike(this.selectedBike.id)
             .subscribe(() => {
                 this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
-                this.selectedStation = null;
                 this.selectedBike = null;
             })
     }

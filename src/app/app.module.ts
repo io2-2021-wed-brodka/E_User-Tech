@@ -47,7 +47,7 @@ import {MenuComponent} from "./menu/menu.component";
 import {MsgService} from "./common/service/msg.service";
 import {SecurityService} from "./common/service/security.service";
 import {BikesComponent} from "./bikes/bikes-component";
-import {StationsComponent} from "./stations/stations-component";
+import {StationsComponent} from "./stations/stations.component";
 import {RegisterComponent} from "./register/register-component";
 import {BikeStationService} from "./common/service/bike-station.service";
 import {AuthInterceptor} from "./common/interceptors/auth-interceptor";
