@@ -1,0 +1,47 @@
+<div class="blocked-stations-component">
+
+  <div class="blocked-bikes">
+    <div class="header">List of blocked bikes</div>
+
+    <div class="filter">
+      <input id="filer-stations" value="{{filter}}" type="text" #v placeholder="Filter" (input)="onFilterInput(v.value)">
+    </div>
+
+    <div class="stations-container">
+      <div class="labels">
+        <div class="id">Bike Id</div>
+        <div class="name">Station</div>
+        <div>Unblock</div>
+      </div>
+      <div class="station" *ngFor="let s of blockedBikes"
+           [ngClass]="s == selectedBike && 'active'">
+        <div class="id">{{s.id}}</div>
+        <div class="name">{{s.station.name}}</div>
+        <div class="unblock" (click)="onUnblockClick(s)">Unblock</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="block-bike">
+    <div class="block-bike-container">
+      <div class="header">Block Bike</div>
+      <div class="input-container">
+        <div>Enter Bike Id</div>
+        <input type="text" value="{{blockInput}}" #bi (input)="onBlockInput(bi.value)">
+      </div>
+      <button class="no" (click)="blockBike()">Block</button>
+    </div>
+  </div>
+
+  <div class="return-modal-bg" *ngIf="selectedBike">
+    <div class="return-modal">
+      <div class="description">
+        Are you sure you want to return bike <span>{{selectedBike.id}}</span>?
+      </div>
+      <div class="actions">
+        <button class="no" (click)="onNoClick()">No</button>
+        <button class="yes" (click)="onYesClick()">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

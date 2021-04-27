@@ -11,14 +11,14 @@
     .bikes-container {
       display: grid;
       grid-gap: 25px;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       place-items: center;
 
       .bike {
         display: flex;
         flex-direction: column;
         background: #fff;
-        max-width: 400px;
+        max-width: 200px;
         align-items: center;
         padding: 15px;
         aspect-ratio: 1/1;
@@ -62,7 +62,7 @@
     flex-direction: column;
 
     .filter {
-      width: 50%;
+      width: 60%;
       margin-bottom: 20px;
 
       input {
@@ -86,7 +86,7 @@
     }
 
     .stations-container {
-      width: 50%;
+      width: 60%;
       padding: 15px;
       border-radius: 15px;
       background: #fff;
