@@ -3,7 +3,8 @@ import {HttpClient} from "@angular/common/http";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {BikeStationDTO} from "../../generated/dto";
+import {BikeStationDTO, BikeStationListDTO} from "../../generated/dto";
+import {map} from "rxjs/operators";
 
 @Injectable()
 export class BikeStationService {
@@ -12,6 +13,6 @@ export class BikeStationService {
     }
 
     getAllBikeStations(): Observable<BikeStationDTO[]> {
-        return this.http.get<BikeStationDTO[]>("/api/stations");
+        return this.http.get<BikeStationListDTO>("/api/stations").pipe(map(r => r.stations));
     }
 }
