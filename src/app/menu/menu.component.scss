@@ -31,8 +31,13 @@
 		&.active {
 			text-decoration: underline;
 		}
+	}
 
-
+	.tech-links {
+		margin-right: 10px;
+		margin-left: auto;
+		display: flex;
+		flex-direction: row;
 	}
 
 }

@@ -53,6 +53,9 @@ import {BikeStationService} from "./common/service/bike-station.service";
 import {AuthInterceptor} from "./common/interceptors/auth-interceptor";
 import {RegisterService} from "./common/service/register.service";
 import {BikeService} from "./common/service/bike.service";
+import {BlockedBikesComponent} from "./blockedBikes/blockedBikes.component";
+import {MalfunctionsComponent} from "./malfunctions/malfunctions.component";
+import {BlockedBikesService} from "./common/service/blocked-bikes.service";
 
 registerLocaleData(localePl, 'pl');
 
@@ -65,7 +68,9 @@ registerLocaleData(localePl, 'pl');
         MenuComponent,
         BikesComponent,
         StationsComponent,
-        RegisterComponent
+        RegisterComponent,
+        BlockedBikesComponent,
+        MalfunctionsComponent
     ],
     imports: [
         HttpClientModule,
@@ -115,6 +120,7 @@ registerLocaleData(localePl, 'pl');
         BikeStationService,
         RegisterService,
         BikeService,
+        BlockedBikesService,
         {
             provide : HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
