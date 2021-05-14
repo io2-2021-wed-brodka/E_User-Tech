@@ -13,6 +13,6 @@ export class BikeStationService {
     }
 
     getAllBikeStations(): Observable<BikeStationDTO[]> {
-        return this.http.get<BikeStationListDTO>("/api/stations").pipe(map(r => r.stations));
+        return this.http.get<BikeStationListDTO>("/api/stations/active").pipe(map(r => r.stations));
     }
 }
