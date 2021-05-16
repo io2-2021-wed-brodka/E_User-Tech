@@ -10,6 +10,16 @@
                 <span>{{b.id}}</span>
             </div>
         </div>
+        <div class="header">Select a bike to view it's reservation info</div>
+        <div class="bikes-container">
+            <div class="bike" *ngFor="let r of reservations" (click)="onReservationClick(r)"
+                 [ngClass]="r == selectedReservation && 'active'">
+                <div class="bike-img">
+                    <img src="assets/img/bike.jpg"/>
+                </div>
+                <span>{{r.id}}</span>
+            </div>
+        </div>
     </div>
     <div class="stations" *ngIf="selectedBike != null">
         <div class="header">Choose a station to return selected bike</div>
@@ -29,15 +39,62 @@
             </div>
         </div>
     </div>
+    <div class="stations" *ngIf="selectedReservation != null">
+        <div class="header">Reservation Info</div>
+
+        <div class="reservation-container">
+            <div>Bike Id:</div>
+            <div>{{selectedReservation.id}}</div>
+
+            <div>Station:</div>
+            <div>{{selectedReservation.station.id}}. {{selectedReservation.station.name}}</div>
+
+            <div>Reserved at:</div>
+            <div>{{displayDate(selectedReservation.reservedAt)}}</div>
+
+            <div>Expires:</div>
+            <div>{{displayDate(selectedReservation.reservedTill)}}</div>
+        </div>
+
+        <div class="actions">
+            <button class="no" (click)="onCancelClick()">Cancel</button>
+            <button class="yes" (click)="onRentClick()">Rent</button>
+        </div>
+    </div>
 
     <div class="return-modal-bg" *ngIf="selectedStation">
         <div class="return-modal">
             <div class="description">
-                Are you sure you want to return bike <span>{{selectedBike.id}}</span> to station <span>{{selectedStation.id + ". " + selectedStation.name}}</span>?
+                Are you sure you want to return bike <span>{{selectedBike.id}}</span> from station <span>{{selectedStation.id + ". " + selectedStation.name}}</span>?
             </div>
             <div class="actions">
                 <button class="no" (click)="onNoClick()">No</button>
                 <button class="yes" (click)="onYesClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="return-modal-bg" *ngIf="action == 'cancel'">
+        <div class="return-modal">
+            <div class="description">
+                Are you sure you want to cancel reservation of bike <span>{{selectedReservation.id}}</span> from station
+                <span>{{selectedReservation.station.id + ". " + selectedReservation.station.name}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onNoClick()">No</button>
+                <button class="yes" (click)="onYesCancelClick()">Yes</button>
+            </div>
+        </div>
+    </div>
+    <div class="return-modal-bg" *ngIf="action == 'rent'">
+        <div class="return-modal">
+            <div class="description">
+                Are you sure you want to rent bike <span>{{selectedReservation.id}}</span> from station
+                <span>{{selectedReservation.station.id + ". " + selectedReservation.station.name}}</span>?
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onNoClick()">No</button>
+                <button class="yes" (click)="onYesRentClick()">Yes</button>
             </div>
         </div>
     </div>
