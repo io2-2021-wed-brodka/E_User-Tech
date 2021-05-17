@@ -3,9 +3,9 @@ import {Router} from '@angular/router';
 import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
-import {BikeService} from "../common/service/bike.service";
-import {BikeDTO, BikeStationDTO} from "../generated/dto";
-import {BikeStationService} from "../common/service/bike-station.service";
+import {BikeService} from '../common/service/bike.service';
+import {BikeDTO, BikeStationDTO} from '../generated/dto';
+import {BikeStationService} from '../common/service/bike-station.service';
 
 @Component({
     selector: 'app-bikes',
@@ -30,9 +30,9 @@ export class BikesComponent implements OnInit {
     filter: string;
 
     ngOnInit(): void {
-        this.bikeService.getRentedBikes().subscribe(bikes => {
-            this.bikes = bikes;
-        })
+        this.bikeService.getRentedBikes().subscribe(bikesResponse => {
+            this.bikes = bikesResponse.bikes;
+        });
     }
 
     onBikeClick(bike: BikeDTO) {
@@ -48,7 +48,7 @@ export class BikesComponent implements OnInit {
 
     onFilterInput(value: string) {
         this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ('' + s.id).startsWith(value));
     }
 
     loadStations() {
@@ -56,7 +56,7 @@ export class BikesComponent implements OnInit {
             .subscribe(stations => {
                 this.loadedStations = stations;
                 this.stations = stations;
-            })
+            });
     }
 
     onStationClick(s: BikeStationDTO) {
@@ -73,6 +73,6 @@ export class BikesComponent implements OnInit {
                 this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
                 this.selectedStation = null;
                 this.selectedBike = null;
-            })
+            });
     }
 }
