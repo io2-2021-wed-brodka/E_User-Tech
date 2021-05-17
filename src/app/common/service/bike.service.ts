@@ -30,10 +30,13 @@ export class BikeService {
         return this.http.post('/api/bikes/rented', body);
     }
 
+    getActiveBikesInStation(stationId: number): Observable<BikeListDTO> {
+        return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes/active`);
+    }
+
     getBikesInStation(stationId: number): Observable<BikeDTO[]> {
         return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes`)
             .pipe(map(r => r.bikes));
     }
 
-    deleteBike(bikeId: number):
 }
