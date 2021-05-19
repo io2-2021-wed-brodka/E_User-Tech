@@ -52,9 +52,9 @@ export class MalfunctionsComponent implements OnInit {
             return;
         }
         this.selectedStation = s;
-        this.bikeService.getBikesInStation(s.id)
-            .subscribe(bikes => {
-                this.bikes = bikes;
+        this.bikeService.getActiveBikesInStation(s.id)
+            .subscribe(bikesResponse => {
+                this.bikes = bikesResponse.bikes;
             });
     }
 

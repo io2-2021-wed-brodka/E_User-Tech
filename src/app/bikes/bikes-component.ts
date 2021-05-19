@@ -33,8 +33,8 @@ export class BikesComponent implements OnInit {
     action: string;
 
     ngOnInit(): void {
-        this.bikeService.getRentedBikes().subscribe(bikes => {
-            this.bikes = bikes;
+        this.bikeService.getRentedBikes().subscribe(bikesResponse => {
+                    this.bikes = bikesResponse.bikes;
         })
         this.bikeService.getReservedBikes().subscribe(reservations => {
             this.reservations = reservations;
@@ -65,7 +65,7 @@ export class BikesComponent implements OnInit {
 
     onFilterInput(value: string) {
         this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ('' + s.id).startsWith(value));
     }
 
     loadStations() {
@@ -73,7 +73,7 @@ export class BikesComponent implements OnInit {
             .subscribe(stations => {
                 this.loadedStations = stations;
                 this.stations = stations;
-            })
+            });
     }
 
     onStationClick(s: BikeStationDTO) {
@@ -91,7 +91,7 @@ export class BikesComponent implements OnInit {
                 this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
                 this.selectedStation = null;
                 this.selectedBike = null;
-            })
+            });
     }
 
     displayDate(date: Date) : string {

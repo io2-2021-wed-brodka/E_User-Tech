@@ -20,21 +20,25 @@ export class BikeService {
     getReservedBikes(): Observable<ReservedBikeDTO[]> {
         return this.http.get<ReservedBikeDTO[]>("/api/bikes/reserved")
     }
-    
+
     returnBike(id: number, stationId: number): Observable<any> {
 
         const body = {
-            "id": id
-        }
+            'id': id
+        };
 
         return this.http.post(`/api/stations/${stationId}/bikes`, body);
     }
 
-    rentBike(id: number) : Observable<any>{
+    rentBike(id: number): Observable<any> {
         const body = {
-            "id": id
-        }
-        return this.http.post("/api/bikes/rented", body);
+            'id': id
+        };
+        return this.http.post('/api/bikes/rented', body);
+    }
+
+    getActiveBikesInStation(stationId: number): Observable<BikeListDTO> {
+        return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes/active`);
     }
 
     getBikesInStation(stationId: number): Observable<BikeDTO[]> {
@@ -52,4 +56,5 @@ export class BikeService {
     cancelReservation(id: number): Observable<any> {
         return this.http.delete(`/api/bikes/reserved/${id}`)
     }
+
 }
