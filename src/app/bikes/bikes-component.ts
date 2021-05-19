@@ -4,7 +4,7 @@ import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
 import {BikeService} from "../common/service/bike.service";
-import {BikeDTO, BikeStationDTO} from "../generated/dto";
+import {BikeDTO, BikeStationDTO, ReservedBikeDTO} from "../generated/dto";
 import {BikeStationService} from "../common/service/bike-station.service";
 
 @Component({
@@ -23,16 +23,32 @@ export class BikesComponent implements OnInit {
     }
 
     bikes: BikeDTO[];
+    reservations: ReservedBikeDTO[];
     selectedBike: BikeDTO;
+    selectedReservation: ReservedBikeDTO;
     loadedStations: BikeStationDTO[];
     stations: BikeStationDTO[];
     selectedStation: BikeStationDTO;
     filter: string;
+    action: string;
 
     ngOnInit(): void {
         this.bikeService.getRentedBikes().subscribe(bikes => {
             this.bikes = bikes;
         })
+        this.bikeService.getReservedBikes().subscribe(reservations => {
+            this.reservations = reservations;
+        })
+
+    }
+
+    onReservationClick(reservation: ReservedBikeDTO) {
+        if (this.selectedReservation == reservation) {
+            this.selectedReservation = null;
+            return;
+        }
+        this.selectedBike = null
+        this.selectedReservation = reservation;
     }
 
     onBikeClick(bike: BikeDTO) {
@@ -40,6 +56,7 @@ export class BikesComponent implements OnInit {
             this.selectedBike = null;
             return;
         }
+        this.selectedReservation = null;
         this.selectedBike = bike;
         if (!this.loadedStations) {
             this.loadStations();
@@ -48,7 +65,7 @@ export class BikesComponent implements OnInit {
 
     onFilterInput(value: string) {
         this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ('' + s.id).startsWith(value));
     }
 
     loadStations() {
@@ -56,7 +73,7 @@ export class BikesComponent implements OnInit {
             .subscribe(stations => {
                 this.loadedStations = stations;
                 this.stations = stations;
-            })
+            });
     }
 
     onStationClick(s: BikeStationDTO) {
@@ -65,6 +82,7 @@ export class BikesComponent implements OnInit {
 
     onNoClick() {
         this.selectedStation = null;
+        this.action = null;
     }
 
     onYesClick() {
@@ -73,6 +91,47 @@ export class BikesComponent implements OnInit {
                 this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
                 this.selectedStation = null;
                 this.selectedBike = null;
+            });
+    }
+
+    displayDate(date: Date) : string {
+        date = new Date(date);
+        return ((date.getHours() > 9) ? date.getHours() : ('0' + date.getHours())) + ":" +
+            ((date.getMinutes() > 9) ? date.getMinutes() : ('0' + date.getMinutes())) + ":" +
+            ((date.getSeconds() > 9) ? date.getSeconds() : ('0' + date.getSeconds())) + " " +
+            ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '.' +
+            ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1)))
+    }
+
+    onCancelClick() {
+        this.action = "cancel";
+    }
+
+    onRentClick() {
+        this.action = "rent";
+    }
+
+    onYesCancelClick() {
+        this.bikeService.cancelReservation(this.selectedReservation.id)
+            .subscribe(() => {
+                this.reservations = this.reservations.filter(r => r.id != this.selectedReservation.id);
+                this.selectedReservation = null;
+                this.action = null;
+            })
+    }
+
+    onYesRentClick() {
+        this.bikeService.rentBike(this.selectedReservation.id)
+            .subscribe(() => {
+                this.reservations = this.reservations.filter(r => r.id != this.selectedReservation.id);
+
+                const newBike = new BikeDTO();
+                newBike.id = this.selectedReservation.id;
+
+                this.bikes.push(newBike)
+
+                this.selectedReservation = null;
+                this.action = null;
             })
     }
 }

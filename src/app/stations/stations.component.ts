@@ -28,6 +28,7 @@ export class StationsComponent implements OnInit {
     stations: BikeStationDTO[];
     selectedStation: BikeStationDTO;
     filter: string;
+    action: string = null;
 
     ngOnInit(): void {
         this.bikeStationService.getAllBikeStations()
@@ -35,6 +36,13 @@ export class StationsComponent implements OnInit {
                 this.loadedStations = stations;
                 this.stations = stations;
             })
+    }
+
+    onReserveClick() {
+        this.action = "reservation"
+    }
+    onRentClick() {
+        this.action = "rental"
     }
 
     onBikeClick(bike: BikeDTO) {
@@ -52,21 +60,31 @@ export class StationsComponent implements OnInit {
             return;
         }
         this.selectedStation = s;
-        this.bikeService.getBikesInStation(s.id)
-            .subscribe(bikes => {
-                this.bikes = bikes;
+        this.bikeService.getActiveBikesInStation(s.id)
+            .subscribe(bikesResponse => {
+                this.bikes = bikesResponse.bikes;
             });
     }
 
     onNoClick() {
         this.selectedBike = null;
+        this.action = null;
     }
 
-    onYesClick() {
+    onYesRentalClick() {
         this.bikeService.rentBike(this.selectedBike.id)
             .subscribe(() => {
                 this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
                 this.selectedBike = null;
+                this.action = null;
+            })
+    }
+    onYesReservationClick() {
+        this.bikeService.reserveBike(this.selectedBike.id)
+            .subscribe(() => {
+                this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
+                this.selectedBike = null;
+                this.action = null;
             })
     }
 }
