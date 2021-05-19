@@ -9,10 +9,11 @@
     padding: 20px;
 
     .bikes-container {
-      display: grid;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
       grid-gap: 25px;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      place-items: center;
+      justify-content: center;
 
       .bike {
         display: flex;
