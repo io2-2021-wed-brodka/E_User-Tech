@@ -33,8 +33,8 @@ export class BikesComponent implements OnInit {
     action: string;
 
     ngOnInit(): void {
-        this.bikeService.getRentedBikes().subscribe(bikesResponse => {
-                    this.bikes = bikesResponse.bikes;
+        this.bikeService.getRentedBikes().subscribe(bikes => {
+            this.bikes = bikes;
         })
         this.bikeService.getReservedBikes().subscribe(reservations => {
             this.reservations = reservations;
