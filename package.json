@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --disable-host-check --port 4201",
+    "start": "ng serve --proxy-config proxy.conf.json --host 0.0.0.0 --disable-host-check --port 4202",
     "start:en": "ng serve --aot --proxy-config proxy.conf.json --host 0.0.0.0 --disable-host-check --project front-app-en",
     "build": "ng build --prod --project front-app",
     "build:en": "ng build --prod --project front-app-en",
