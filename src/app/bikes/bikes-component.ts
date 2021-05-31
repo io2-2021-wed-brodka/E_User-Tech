@@ -37,7 +37,7 @@ export class BikesComponent implements OnInit {
             this.bikes = bikes;
         })
         this.bikeService.getReservedBikes().subscribe(reservations => {
-            this.reservations = reservations;
+            this.reservations = reservations.bikes;
         })
 
     }

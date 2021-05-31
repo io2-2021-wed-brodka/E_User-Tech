@@ -17,8 +17,8 @@ export class BikeService {
             .pipe(map(r => r.bikes));
     }
 
-    getReservedBikes(): Observable<ReservedBikeDTO[]> {
-        return this.http.get<ReservedBikeDTO[]>("/api/bikes/reserved")
+    getReservedBikes(): Observable<ReservedBikesListDTO> {
+        return this.http.get<ReservedBikesListDTO>("/api/bikes/reserved")
     }
 
     returnBike(id: number, stationId: number): Observable<any> {
