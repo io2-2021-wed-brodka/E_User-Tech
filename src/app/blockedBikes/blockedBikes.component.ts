@@ -31,8 +31,8 @@ export class BlockedBikesComponent implements OnInit {
     ngOnInit(): void {
         this.blockedBikesService.getBlockedBikes()
             .subscribe(stations => {
-                this.loadedBlockedBikes = stations;
-                this.blockedBikes = stations;
+                this.loadedBlockedBikes = stations.bikes;
+                this.blockedBikes = stations.bikes;
             })
     }
 

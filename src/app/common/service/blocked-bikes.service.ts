@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {BikeDTO, BikeStationDTO} from "../../generated/dto";
+import {BikeDTO, BikeStationDTO, BikeListDTO} from "../../generated/dto";
 
 @Injectable()
 export class BlockedBikesService {
@@ -11,8 +11,8 @@ export class BlockedBikesService {
     constructor(private http: HttpClient) {
     }
 
-    getBlockedBikes(): Observable<BikeDTO[]> {
-        return this.http.get<BikeDTO[]>("/api/bikes/blocked");
+    getBlockedBikes(): Observable<BikeListDTO> {
+        return this.http.get<BikeListDTO>("/api/bikes/blocked");
     }
 
     unblockBike(id: number): Observable<any> {

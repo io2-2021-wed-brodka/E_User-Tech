@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {AppService} from "../../app.service";
 import {Router} from "@angular/router";
 import {Observable} from "rxjs";
-import {BikeDTO, BikeListDTO, BikeStationDTO, ReservedBikeDTO} from "../../generated/dto";
+import {BikeDTO, BikeListDTO, BikeStationDTO, ReservedBikeDTO, ReservedBikesListDTO} from "../../generated/dto";
 import {map} from "rxjs/operators";
 
 @Injectable()
