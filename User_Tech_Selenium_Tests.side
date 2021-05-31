@@ -5,7 +5,7 @@
   "url": "http://localhost:4202",
   "tests": [{
     "id": "90e6829d-c029-4944-aed7-294eea2cf256",
-    "name": "Wypożyczenie i zwrot roweru",
+    "name": "2.1-2 Wypożyczenie i zwrot roweru",
     "commands": [{
       "id": "593807ae-7529-4260-8aab-152e29ba50aa",
       "comment": "",
@@ -198,7 +198,7 @@
     }]
   }, {
     "id": "a55ddefb-e40b-4da3-bfb4-2a57bdb5ec0d",
-    "name": "Rejestracja, logowanie i wylogowywanie",
+    "name": "1.1-3 Rejestracja, logowanie i wylogowywanie",
     "commands": [{
       "id": "919ea354-d3aa-4b32-9ccc-44aca46e74c6",
       "comment": "",

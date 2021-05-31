@@ -38,7 +38,7 @@ export class BikeService {
     }
 
     getActiveBikesInStation(stationId: number): Observable<BikeListDTO> {
-        return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes/active`);
+        return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes`);
     }
 
     getBikesInStation(stationId: number): Observable<BikeDTO[]> {
