@@ -22,6 +22,11 @@
         </div>
     </div>
     <div class="stations" *ngIf="selectedBike != null">
+
+        <div class="report">
+            <button (click)="onReportClick()">Report malfunction</button>
+        </div>
+
         <div class="header">Choose a station to return selected bike</div>
 
         <div class="filter">
@@ -59,6 +64,18 @@
         <div class="actions">
             <button class="no" (click)="onCancelClick()">Cancel</button>
             <button class="yes" (click)="onRentClick()">Rent</button>
+        </div>
+    </div>
+
+    <div class="return-modal-bg" *ngIf="reported">
+        <div class="return-modal">
+            <div class="description">
+                <textarea value="{{description}}" #v (input)="onReportDescriptionInput(v.value) "></textarea>
+            </div>
+            <div class="actions">
+                <button class="no" (click)="onNoClick()">Cancel</button>
+                <button class="yes" (click)="onReportConfimClick()">Report</button>
+            </div>
         </div>
     </div>
 

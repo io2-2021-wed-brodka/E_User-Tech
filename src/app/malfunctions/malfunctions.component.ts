@@ -4,8 +4,9 @@ import {SecurityService} from '../common/service/security.service';
 import {AppService} from '../app.service';
 import {MsgService} from '../common/service/msg.service';
 import {BikeService} from "../common/service/bike.service";
-import {BikeDTO, BikeStationDTO} from "../generated/dto";
+import {BikeDTO, BikeStationDTO, MalfunctionDTO} from "../generated/dto";
 import {BikeStationService} from "../common/service/bike-station.service";
+import {MalfunctionService} from "../common/service/malfunction.service";
 
 @Component({
     selector: 'app-stations',
@@ -18,55 +19,31 @@ export class MalfunctionsComponent implements OnInit {
                 private app: AppService,
                 private router: Router,
                 private msgService: MsgService,
-                private bikeService: BikeService,
-                private bikeStationService: BikeStationService) {
+                private malfunctionService: MalfunctionService) {
     }
 
-    bikes: BikeDTO[];
-    selectedBike: BikeDTO;
-    loadedStations: BikeStationDTO[];
-    stations: BikeStationDTO[];
-    selectedStation: BikeStationDTO;
+    loadedMalfunctions: MalfunctionDTO[];
+    malfunctions: MalfunctionDTO[];
     filter: string;
 
     ngOnInit(): void {
-        this.bikeStationService.getAllBikeStations()
-            .subscribe(stations => {
-                this.loadedStations = stations;
-                this.stations = stations;
+        this.malfunctionService.getMalfunctions()
+            .subscribe(malfunctions => {
+                this.loadedMalfunctions = malfunctions;
+                this.malfunctions = malfunctions;
             })
-    }
-
-    onBikeClick(bike: BikeDTO) {
-        this.selectedBike = bike;
     }
 
     onFilterInput(value: string) {
         this.filter = value;
-        this.stations = this.loadedStations.filter(s => s.name.includes(value) || ("" + s.id).startsWith(value))
+        this.malfunctions = this.loadedMalfunctions.filter(s => ("" + s.bikeId).startsWith(value))
     }
 
-    onStationClick(s: BikeStationDTO) {
-        if(this.selectedStation == s) {
-            this.selectedStation = null;
-            return;
-        }
-        this.selectedStation = s;
-        this.bikeService.getActiveBikesInStation(s.id)
-            .subscribe(bikesResponse => {
-                this.bikes = bikesResponse.bikes;
-            });
-    }
-
-    onNoClick() {
-        this.selectedBike = null;
-    }
-
-    onYesClick() {
-        this.bikeService.rentBike(this.selectedBike.id)
+    onDeleteClick(m: MalfunctionDTO) {
+        this.malfunctionService.deleteMalfunction(m.id)
             .subscribe(() => {
-                this.bikes = this.bikes.filter(b => b.id != this.selectedBike.id);
-                this.selectedBike = null;
+                this.loadedMalfunctions = this.loadedMalfunctions.filter(mal => mal != m);
+                this.malfunctions = this.malfunctions.filter(mal => mal != m);
             })
     }
 }

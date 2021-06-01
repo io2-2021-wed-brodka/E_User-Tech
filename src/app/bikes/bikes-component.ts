@@ -6,6 +6,7 @@ import {MsgService} from '../common/service/msg.service';
 import {BikeService} from "../common/service/bike.service";
 import {BikeDTO, BikeStationDTO, ReservedBikeDTO} from "../generated/dto";
 import {BikeStationService} from "../common/service/bike-station.service";
+import {MalfunctionService} from "../common/service/malfunction.service";
 
 @Component({
     selector: 'app-bikes',
@@ -19,6 +20,7 @@ export class BikesComponent implements OnInit {
                 private router: Router,
                 private msgService: MsgService,
                 private bikeService: BikeService,
+                private malfunctionService: MalfunctionService,
                 private bikeStationService: BikeStationService) {
     }
 
@@ -31,6 +33,9 @@ export class BikesComponent implements OnInit {
     selectedStation: BikeStationDTO;
     filter: string;
     action: string;
+    reported = false;
+    description = "";
+    reportedMessage = false;
 
     ngOnInit(): void {
         this.bikeService.getRentedBikes().subscribe(bikes => {
@@ -83,6 +88,7 @@ export class BikesComponent implements OnInit {
     onNoClick() {
         this.selectedStation = null;
         this.action = null;
+        this.reported = false;
     }
 
     onYesClick() {
@@ -132,6 +138,23 @@ export class BikesComponent implements OnInit {
 
                 this.selectedReservation = null;
                 this.action = null;
+            })
+    }
+
+    onReportClick() {
+        this.reported = true;
+    }
+
+    onReportDescriptionInput(s: string) {
+        this.description = s;
+    }
+
+    onReportConfimClick() {
+        this.malfunctionService.createMalfunction(this.selectedBike.id, this.description)
+            .subscribe(() => {
+                this.description = "";
+                this.reported = false;
+                this.reportedMessage = true;
             })
     }
 }
