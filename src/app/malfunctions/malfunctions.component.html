@@ -9,12 +9,12 @@
 
     <div class="stations-container">
       <div class="labels">
-        <div class="id">Id</div>
+        <div class="id">Bike Id</div>
         <div class="description">Description</div>
         <div class="actions">Actions</div>
       </div>
       <div class="station" *ngFor="let s of malfunctions">
-        <div class="id">{{s.id}}</div>
+        <div class="id">{{s.bikeId}}</div>
         <div class="description">{{s.description}}</div>
         <div class="actions">
           <button class="no" (click)="onDeleteClick(s)">Delete</button>
