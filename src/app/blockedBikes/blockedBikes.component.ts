@@ -42,7 +42,7 @@ export class BlockedBikesComponent implements OnInit {
     }
 
     blockBike() {
-        this.blockedBikesService.blockBike(+this.blockInput).subscribe(bike => {
+        this.blockedBikesService.blockBike(this.blockInput).subscribe(bike => {
             this.blockInput = "";
             this.loadedBlockedBikes.push(bike);
             this.blockedBikes = this.loadedBlockedBikes

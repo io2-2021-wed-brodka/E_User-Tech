@@ -15,11 +15,11 @@ export class BlockedBikesService {
         return this.http.get<BikeListDTO>("/api/bikes/blocked");
     }
 
-    unblockBike(id: number): Observable<any> {
+    unblockBike(id: string): Observable<any> {
         return this.http.delete(`/api/bikes/blocked/${id}`)
     }
 
-    blockBike(id: number): Observable<BikeDTO> {
+    blockBike(id: string): Observable<BikeDTO> {
         const body = {
             "id": id
         }

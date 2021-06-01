@@ -21,7 +21,7 @@ export class BikeService {
         return this.http.get<ReservedBikesListDTO>("/api/bikes/reserved")
     }
 
-    returnBike(id: number, stationId: number): Observable<any> {
+    returnBike(id: string, stationId: string): Observable<any> {
 
         const body = {
             'id': id
@@ -30,30 +30,30 @@ export class BikeService {
         return this.http.post(`/api/stations/${stationId}/bikes`, body);
     }
 
-    rentBike(id: number): Observable<any> {
+    rentBike(id: string): Observable<any> {
         const body = {
             'id': id
         };
         return this.http.post('/api/bikes/rented', body);
     }
 
-    getActiveBikesInStation(stationId: number): Observable<BikeListDTO> {
+    getActiveBikesInStation(stationId: string): Observable<BikeListDTO> {
         return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes`);
     }
 
-    getBikesInStation(stationId: number): Observable<BikeDTO[]> {
+    getBikesInStation(stationId: string): Observable<BikeDTO[]> {
         return this.http.get<BikeListDTO>(`/api/stations/${stationId}/bikes`)
             .pipe(map(r => r.bikes));
     }
 
-    reserveBike(id: number) : Observable<any>{
+    reserveBike(id: string) : Observable<any>{
         const body = {
             "id": id
         }
         return this.http.post("/api/bikes/reserved", body);
     }
 
-    cancelReservation(id: number): Observable<any> {
+    cancelReservation(id: string): Observable<any> {
         return this.http.delete(`/api/bikes/reserved/${id}`)
     }
 
