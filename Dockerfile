@@ -1,12 +1,6 @@
-FROM node:14
+FROM nginx
 
-WORKDIR /usr
+COPY nginx.conf /etc/nginx/nginx.conf
 
-COPY . .
-
-RUN npm install
-
-EXPOSE 4202
-
-CMD ["npm", "start"]
-
+WORKDIR /usr/share/nginx/html
+COPY target/classes/static/front-app/ .
