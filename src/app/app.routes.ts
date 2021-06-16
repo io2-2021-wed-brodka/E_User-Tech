@@ -7,6 +7,7 @@ import {RegisterComponent} from "./register/register-component";
 import {AuthGuard} from "./common/guards/auth-guard";
 import {BlockedBikesComponent} from "./blockedBikes/blockedBikes.component";
 import {MalfunctionsComponent} from "./malfunctions/malfunctions.component";
+import {ContactComponent} from './contact/contact.component';
 
 export const routes: Routes = [
     {path: 'login', component: LoginComponent},
@@ -25,6 +26,10 @@ export const routes: Routes = [
             {
                 path: 'stations',
                 component: StationsComponent
+            },
+            {
+                path: 'contact',
+                component: ContactComponent
             },
             {
                 path: 'blockedBikes',
