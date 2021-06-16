@@ -57,6 +57,8 @@ import {BlockedBikesComponent} from "./blockedBikes/blockedBikes.component";
 import {MalfunctionsComponent} from "./malfunctions/malfunctions.component";
 import {BlockedBikesService} from "./common/service/blocked-bikes.service";
 import {MalfunctionService} from "./common/service/malfunction.service";
+import {ContactComponent} from './contact/contact.component';
+
 
 registerLocaleData(localePl, 'pl');
 
@@ -71,7 +73,8 @@ registerLocaleData(localePl, 'pl');
         StationsComponent,
         RegisterComponent,
         BlockedBikesComponent,
-        MalfunctionsComponent
+        MalfunctionsComponent,
+        ContactComponent
     ],
     imports: [
         HttpClientModule,
