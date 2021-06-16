@@ -56,7 +56,9 @@ import {BikeService} from "./common/service/bike.service";
 import {BlockedBikesComponent} from "./blockedBikes/blockedBikes.component";
 import {MalfunctionsComponent} from "./malfunctions/malfunctions.component";
 import {BlockedBikesService} from "./common/service/blocked-bikes.service";
+import {MalfunctionService} from "./common/service/malfunction.service";
 import {ContactComponent} from './contact/contact.component';
+
 
 registerLocaleData(localePl, 'pl');
 
@@ -112,7 +114,7 @@ registerLocaleData(localePl, 'pl');
         SelectButtonModule,
         TooltipModule,
         InputTextareaModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
     ],
     providers: [
         AppService,
@@ -122,6 +124,7 @@ registerLocaleData(localePl, 'pl');
         BikeStationService,
         RegisterService,
         BikeService,
+        MalfunctionService,
         BlockedBikesService,
         {
             provide : HTTP_INTERCEPTORS,
